@@ -1,0 +1,55 @@
+:root {
+    --primary: #555B6E;
+    --secondary: #89B0AE;
+    --third: #BEE3DB;
+    --fourth: #FAF9F9;
+    --fifth: #FFD6BA;
+
+}
+
+body {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    padding: 0;
+    margin: 0;
+}
+
+.nav {
+    width: 100%;
+    background: blue;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title {
+    color: white;
+    padding: 10px;
+    font-weight: lighter;
+    text-decoration: none;
+    font-size: 24px;
+}
+
+.title:hover {
+    color: purple;
+}
+
+.nav-items {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+}
+
+.nav-items li {
+    padding: 10px;
+    font-size: 18px;
+}
+
+.nav-items a {
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.nav-items a:hover {
+    color: purple;
+}
