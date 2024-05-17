@@ -25,6 +25,7 @@ body {
     margin-left: 50px;
 }
 
+
 .footer {
     margin-bottom: 25px;
     margin-left: 500px;
@@ -34,3 +35,6 @@ body {
     margin-left: 130px;
 }
 
+.email {
+    max-width: 50vw;
+}
