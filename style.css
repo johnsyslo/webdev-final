@@ -29,10 +29,6 @@ body {
     margin-left: 130px;
 }
 
-.copy {
-    margin-bottom: 25px;
-    margin-right: 50px;
-}
 .rounded-circle {
     width: 33px;
     height: 33px;
@@ -40,4 +36,5 @@ body {
 
 #text {
     margin-top: 15% !important;
+    font-size: 20px;
 }
