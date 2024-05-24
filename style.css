@@ -38,3 +38,10 @@ body {
     margin-top: 15% !important;
     font-size: 20px;
 }
+
+h1 {
+    font-family: serif;
+}
+.first-color { 
+	background: #e7eaf6; 
+}
