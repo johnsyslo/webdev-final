@@ -22,7 +22,7 @@ function getCartItems() {
 
 function removeFromCart(item) {
     let items = getCartItems();
-    items = items.filter(item.id => item.dataset.itemId !== item);
+    items = items.filter(item => item.dataset.itemId !== item);
 
     let expiryDate = new Date();
     expiryDate.setTime(expiryDate.getTime() + (7 * 24 * 60 * 60 * 1000));
