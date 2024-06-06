@@ -1,59 +1,43 @@
-alert(localS)
-
-function getCartItems() {
-    let cookie = document.cookie.split(';').find(row => row.includes('cart='));
-    if (cookie) {
-        return JSON.parse(cookie.split('=')[1]);
-    } else {
-        return [];
-    }
+function refreshCart() {
+    localStorage.setItem('teal-ball', document.getElementById('quantity1').value)
+    localStorage.setItem('orange-ball', document.getElementById('quantity2').value)
+    localStorage.setItem('pink-ball', document.getElementById('quantity3').value)
 }
 
- function addToCart(item) {
-    let items = getCartItems();
-    items.push(item);
-
-    let expiryDate = new Date();
-    expiryDate.setTime(expiryDate.getTime() + (7 * 24 * 60 * 60 * 1000));
-    document.cookie = `cart=${JSON.stringify(items)};expires=${expiryDate.toUTCString()};path=/`;
-
-    updateCartDisplay();
-}
-
-function removeFromCart(item) {
-    let items = getCartItems();
-    items = items.filter(item => item.dataset.itemId !== item);
-
-    let expiryDate = new Date();
-    expiryDate.setTime(expiryDate.getTime() + (7 * 24 * 60 * 60 * 1000));
-    document.cookie = `cart=${JSON.stringify(items)};expires=${expiryDate.toUTCString()};path=/`;
-
-    updateCartDisplay();
+function addToCart() {
+    refreshCart();
 }
 
 function updateCartDisplay() {
-    let cartItems = document.getElementById('cart-items');
-    cartItems.innerHTML = '';
+    var itemQuantity = getTotalItems();
+    document.getElementById('cart-total-items').innerHTML = itemQuantity;
 
-    let items = getCartItems();
-    items.forEach(item => {
-        let cartItem = document.createElement('li');
-        cartItem.className = 'list-group-item d-flex justify-content-between lh-condensed';
+    let tealBall = document.getElementById('teal-ball-cart');
+    let orangeBall = document.getElementById('orange-ball-cart');
+    let pinkBall = document.getElementById('pink-ball-cart');
 
-        let removeButton = document.createElement('button');
-        removeButton.className = 'btn btn-danger';
-        removeButton.innerHTML = 'x';
-        removeButton.onClick = removeFromCart(item)
+    let tealBallAmount = localStorage.getItem('teal-ball')
+    let orangeBallAmount = localStorage.getItem('orange-ball')
+    let pinkBallAmount = localStorage.getItem('pink-ball')
 
-        if (item == 'orange-ball') var itemName = 'Orange Ball';
-        if (item == 'pink-ball') var itemName = 'Pink Ball';
-        if (item == 'teal-ball') var itemName = 'Teal Ball';
+    tealBall.innerHTML = tealBallAmount.toString() + 'x Teal Ball' + ' --- $' + (tealBallAmount*24.99).toFixed(2).toString();
+    orangeBall.innerHTML = orangeBallAmount.toString() + 'x Orange Ball' + ' --- $' + (orangeBallAmount*19.99).toFixed(2).toString();
+    pinkBall.innerHTML = pinkBallAmount.toString() + 'x Pink Ball' + ' --- $' + (pinkBallAmount*24.99).toFixed(2).toString();
 
-        cartItem.innerHTML = itemName;
-        cartItem.dataset.itemId = item;
-        
-        cartItems.appendChild(cartItem);
-        cartItems.appendChild(removeButton);
-    });
+    let total = (tealBallAmount*24.99) + (orangeBallAmount*19.99) + (pinkBallAmount*24.99)
+    var taxes = total * .10;
+    total = total + taxes;
+    document.getElementById('taxes').innerHTML = 'Taxes: $' + taxes.toFixed(2);
+    document.getElementById('total-price').innerHTML = 'Total: $' + total.toFixed(2);
 }
+
+function getTotalItems() {
+    var totalOrangeBall = localStorage.getItem('orange-ball');
+    var totalTealBall = localStorage.getItem('teal-ball');
+    var totalPinkBall = localStorage.getItem('pink-ball');
+
+    var totalItems = parseInt(totalOrangeBall) + parseInt(totalTealBall) + parseInt(totalPinkBall);
+    return totalItems;
+}
+
 updateCartDisplay();
